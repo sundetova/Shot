@@ -43,12 +43,12 @@ class Shot(adb: Adb,
       projectFolder,
       flavor,
       buildType,
-      buildFolder + Config.recordingReportFolder + "/images/recorded/")
+      buildFolder + Config.recordingReportFolder(flavor, buildType) + "/images/recorded/")
     console.show(
       "😃  Screenshots recorded and saved at: " + projectFolder + Config.screenshotsFolderName(flavor, buildType))
-    reporter.generateRecordReport(appId, screenshots, buildFolder)
+    reporter.generateRecordReport(appId, screenshots, buildFolder, flavor, buildType)
     console.show(
-      "🤓  You can review the execution report here: " + buildFolder + Config.recordingReportFolder + "/index.html")
+      "🤓  You can review the execution report here: " + buildFolder + Config.recordingReportFolder(flavor, buildType) + "/index.html")
     removeProjectTemporalScreenshotsFolder(projectFolder, flavor, buildType)
   }
 
@@ -62,7 +62,7 @@ class Shot(adb: Adb,
                          shouldPrintBase64Error: Boolean): ScreenshotsComparisionResult = {
     console.show("🔎  Comparing screenshots with previous ones.")
     val screenshots = readScreenshotsMetadata(projectFolder, flavor, buildType, projectName)
-    val newScreenshotsVerificationReportFolder = buildFolder + Config.verificationReportFolder + "/images/"
+    val newScreenshotsVerificationReportFolder = buildFolder + Config.verificationReportFolder(flavor, buildType) + "/images/"
     screenshotsSaver.saveTemporalScreenshots(
       screenshots,
       projectName,
@@ -76,7 +76,7 @@ class Shot(adb: Adb,
       projectFolder,
       flavor,
       buildType,
-      buildFolder + Config.verificationReportFolder + "/images/recorded/")
+      buildFolder + Config.verificationReportFolder(flavor, buildType) + "/images/recorded/")
 
     if (updatedComparision.hasErrors) {
       consoleReporter.showErrors(updatedComparision,
@@ -85,9 +85,9 @@ class Shot(adb: Adb,
       console.showSuccess("✅  Yeah!!! Your tests are passing.")
     }
     removeProjectTemporalScreenshotsFolder(projectFolder, flavor, buildType)
-    reporter.generateVerificationReport(appId, comparision, buildFolder)
+    reporter.generateVerificationReport(appId, comparision, buildFolder, flavor, buildType)
     console.show(
-      "🤓  You can review the execution report here: " + buildFolder + Config.verificationReportFolder + "/index.html")
+      "🤓  You can review the execution report here: " + buildFolder + Config.verificationReportFolder(flavor, buildType) + "/index.html")
     comparision
   }
 

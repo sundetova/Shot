@@ -29,9 +29,9 @@ object Config {
   val screenshotsTemporalRootPath: FilePath = "/tmp/shot/screenshot/"
   def defaultInstrumentationTestTask(flavor: String, buildType: String) : String = s"connected${flavor.capitalize}${buildType.capitalize}AndroidTest"
   val defaultPackageTestApkTask: String = "packageDebugAndroidTest"
-  val reportFolder: String = "/reports/shot"
-  val verificationReportFolder: String = reportFolder + "/verification"
-  val recordingReportFolder: String = reportFolder + "/record"
+  def reportFolder(flavor: String, buildType: String): String = "/reports/shot"
+  def verificationReportFolder(flavor: String, buildType: String): String = reportFolder(flavor, buildType) + "/verification"
+  def recordingReportFolder(flavor: String, buildType: String): String = reportFolder(flavor, buildType) + "/record"
 }
 
 case class Screenshot(name: String,
