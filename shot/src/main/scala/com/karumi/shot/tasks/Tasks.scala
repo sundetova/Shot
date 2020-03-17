@@ -48,7 +48,7 @@ class ExecuteScreenshotTests extends ShotTask {
     val project = getProject
     val recordScreenshots = project.hasProperty("record")
     val printBase64 = project.hasProperty("printBase64")
-    val projectFolder = project.getProjectDir.getAbsolutePath
+    val projectFolder = shotExtension.getReferenceDir
     val projectName = project.getName
     val buildFolder = project.getBuildDir.getAbsolutePath
     val appId = shotExtension.getAppId
