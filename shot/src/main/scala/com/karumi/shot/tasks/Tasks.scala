@@ -80,7 +80,7 @@ class DownloadScreenshotsTask extends ShotTask {
 
   @TaskAction
   def downloadScreenshots(): Unit = {
-    val projectFolder = getProject.getProjectDir.getAbsolutePath
+    val projectFolder = shotExtension.getOptionReferenceDir
     val appId = shotExtension.getOptionAppId
     shot.downloadScreenshots(projectFolder, appId)
   }
