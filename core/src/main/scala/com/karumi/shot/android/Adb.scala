@@ -20,6 +20,7 @@ class Adb {
   def pullScreenshots(device: String,
                       screenshotsFolder: Folder,
                       appId: AppId): Unit = {
+    print("pullScreenshots = "+s"-s $device pull /sdcard/screenshots/$appId.test/screenshots-default/ $screenshotsFolder")
     executeAdbCommandWithResult (
     s"-s $device pull /sdcard/screenshots/$appId.test/screenshots-default/ $screenshotsFolder")
   }
@@ -32,6 +33,7 @@ class Adb {
     s"${Adb.adbBinaryPath} $command".!
 
   private def executeAdbCommandWithResult(command: String): String = {
+    print("executeAdbCommandWithResult " + s"${Adb.adbBinaryPath} $command".!!)
     s"${Adb.adbBinaryPath} $command".!!
   }
 
