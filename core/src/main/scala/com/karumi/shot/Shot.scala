@@ -137,6 +137,7 @@ class Shot(adb: Adb,
       projectFolder: Folder,
       projectName: String): ScreenshotsSuite = {
     val screenshotsFolder = projectFolder + Config.pulledScreenshotsFolder
+    Console.print("readScreenshotsMetadata="+screenshotsFolder)
     val filesInScreenshotFolder = new java.io.File(screenshotsFolder).listFiles
     val metadataFiles = filesInScreenshotFolder.filter(file =>
       file.getAbsolutePath.contains(Config.metadataFileName))
