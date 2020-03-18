@@ -1,7 +1,6 @@
 package com.karumi.shot.android
 
 import com.karumi.shot.domain.model.{AppId, Folder}
-import com.karumi.shot.ui.Console
 
 import scala.sys.process._
 
@@ -19,11 +18,9 @@ class Adb {
 
   def pullScreenshots(device: String,
                       screenshotsFolder: Folder,
-                      appId: AppId): Unit = {
-    Console.print("pullScreenshots = "+s"-s $device pull /sdcard/screenshots/$appId.test/screenshots-default/ $screenshotsFolder")
-    executeAdbCommandWithResult (
-    s"-s $device pull /sdcard/screenshots/$appId.test/screenshots-default/ $screenshotsFolder")
-  }
+                      appId: AppId): Unit =
+    executeAdbCommandWithResult(
+      s"-s $device pull /sdcard/screenshots/$appId.test/screenshots-default/ $screenshotsFolder")
 
   def clearScreenshots(device: String, appId: AppId): Unit =
     executeAdbCommand(
@@ -32,9 +29,7 @@ class Adb {
   private def executeAdbCommand(command: String): Int =
     s"${Adb.adbBinaryPath} $command".!
 
-  private def executeAdbCommandWithResult(command: String): String = {
-    Console.print("executeAdbCommandWithResult " + s"${Adb.adbBinaryPath} $command".!!)
+  private def executeAdbCommandWithResult(command: String): String =
     s"${Adb.adbBinaryPath} $command".!!
-  }
 
 }
