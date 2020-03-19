@@ -2,13 +2,16 @@ package com.karumi.shot.tasks
 
 import com.karumi.shot.android.Adb
 import com.karumi.shot.base64.Base64Encoder
-import com.karumi.shot.domain.model.Folder
 import com.karumi.shot.reports.{ConsoleReporter, ExecutionReporter}
-import com.karumi.shot.screenshots.{ScreenshotsComparator, ScreenshotsDiffGenerator, ScreenshotsSaver}
+import com.karumi.shot.screenshots.{
+  ScreenshotsComparator,
+  ScreenshotsDiffGenerator,
+  ScreenshotsSaver
+}
 import com.karumi.shot.ui.Console
 import com.karumi.shot.{Files, Shot, ShotExtension}
-import org.gradle.api.tasks.TaskAction
 import org.gradle.api.{DefaultTask, GradleException}
+import org.gradle.api.tasks.TaskAction
 
 abstract class ShotTask() extends DefaultTask {
 
@@ -77,7 +80,7 @@ class DownloadScreenshotsTask extends ShotTask {
 
   @TaskAction
   def downloadScreenshots(): Unit = {
-    val projectFolder:Folder = shotExtension.getOptionReferenceDir.toString
+    val projectFolder = shotExtension.getOptionReferenceDir
     val appId = shotExtension.getOptionAppId
     Console.print("downloadScreenshots="+projectFolder)
     shot.downloadScreenshots(projectFolder, appId)
