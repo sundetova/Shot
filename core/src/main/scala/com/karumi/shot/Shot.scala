@@ -39,7 +39,7 @@ class Shot(adb: Adb,
 
   def downloadScreenshots(projectFolder: Folder, appId: Option[AppId]): Unit =
     executeIfAppIdIsValid(appId) { applicationId =>
-      console.show("⬇️  Pulling screenshots from your connected devices!")
+      console.show("⬇️  Pulling screenshots from your connected devices!"+projectFolder)
       pullScreenshots(projectFolder, applicationId)
     }
 
@@ -122,6 +122,8 @@ class Shot(adb: Adb,
       val screenshotsFolder = projectFolder + Config.screenshotsFolderName
       createScreenshotsFolderIfDoesNotExist(screenshotsFolder)
       adb.pullScreenshots(device, screenshotsFolder, appId)
+      Console.print("Shot.pullScreenshots.120 ="+projectFolder)
+
       extractPicturesFromBundle(projectFolder + Config.pulledScreenshotsFolder)
       renameMetadataFile(projectFolder, device)
     }
@@ -149,6 +151,8 @@ class Shot(adb: Adb,
                        projectFolder + Config.screenshotsFolderName,
                        projectFolder + Config.pulledScreenshotsFolder)
     }
+    Console.print("readScreenshotsMetadata.parseScreenshots.120 ="+projectFolder + Config.pulledScreenshotsFolder)
+
     screenshotSuite.par.map { screenshot =>
       val viewHierarchyFileName = projectFolder + Config.pulledScreenshotsFolder + screenshot.viewHierarchy
       val viewHierarchyContent = files.read(viewHierarchyFileName)
@@ -158,6 +162,7 @@ class Shot(adb: Adb,
 
   private def removeProjectTemporalScreenshotsFolder(
       projectFolder: Folder): Unit = {
+    Console.print("removeProjectTemporalScreenshotsFolder="+projectFolder)
     val projectTemporalScreenshots = new File(
       projectFolder + Config.pulledScreenshotsFolder)
 
