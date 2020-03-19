@@ -81,7 +81,6 @@ class DownloadScreenshotsTask extends ShotTask {
   def downloadScreenshots(): Unit = {
     val projectFolder = shotExtension.getOptionReferenceDir
     val appId = shotExtension.getOptionAppId
-    Console.print("downloadScreenshots="+projectFolder)
     shot.downloadScreenshots(projectFolder, appId)
   }
 }
