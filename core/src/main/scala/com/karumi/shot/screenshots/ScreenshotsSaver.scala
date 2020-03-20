@@ -48,13 +48,11 @@ class ScreenshotsSaver {
 
   private def saveScreenshots(screenshots: ScreenshotsSuite, folder: Folder) = {
     val screenshotsFolder = new File(folder)
-    println("screenshotsFolder=="+screenshotsFolder.getAbsolutePath)
     if (!screenshotsFolder.exists()) {
       screenshotsFolder.mkdirs()
     }
     screenshots.par.foreach { screenshot =>
       val outputFile = new File(folder + screenshot.fileName)
-      println("outputFile=="+outputFile.getAbsolutePath)
 
       if (!outputFile.exists()) {
         outputFile.createNewFile()
