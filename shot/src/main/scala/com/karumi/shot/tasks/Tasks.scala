@@ -43,6 +43,7 @@ class ExecuteScreenshotTests extends ShotTask {
   @TaskAction
   def executeScreenshotTests(): Unit = {
     val project = getProject
+    println("----executeScreenshotTests----")
     val recordScreenshots = project.hasProperty("record")
     val printBase64 = project.hasProperty("printBase64")
     val projectFolder = shotExtension.getReferenceDir
@@ -50,8 +51,11 @@ class ExecuteScreenshotTests extends ShotTask {
     val buildFolder = project.getBuildDir.getAbsolutePath
     val appId = shotExtension.getAppId
     if (recordScreenshots) {
+      println("----recordScreenshots----")
+
       shot.recordScreenshots(appId, buildFolder, projectFolder, projectName)
     } else {
+      println("----verifyScreenshots----")
       val result = shot.verifyScreenshots(appId,
                                           buildFolder,
                                           projectFolder,
