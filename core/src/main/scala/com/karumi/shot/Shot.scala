@@ -114,6 +114,7 @@ class Shot(adb: Adb,
 
   private def createScreenshotsFolderIfDoesNotExist(screenshotsFolder: AppId) = {
     val folder = new File(screenshotsFolder)
+    Console.println("createScreenshotsFolderIfDoesNotExist="+folder.getAbsolutePath)
     folder.mkdirs()
   }
 
@@ -123,6 +124,7 @@ class Shot(adb: Adb,
       createScreenshotsFolderIfDoesNotExist(screenshotsFolder)
       adb.pullScreenshots(device, screenshotsFolder, appId)
       extractPicturesFromBundle(projectFolder + Config.pulledScreenshotsFolder)
+      Console.println("extractPicturesFromBundle="+projectFolder + Config.pulledScreenshotsFolder)
       renameMetadataFile(projectFolder, device)
     }
   }
