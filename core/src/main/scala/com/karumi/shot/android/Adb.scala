@@ -30,7 +30,8 @@ class Adb {
     s"${Adb.adbBinaryPath} $command".!
 
   private def executeAdbCommandWithResult(command: String): String = {
-    Console.println("executeAdbCommandWithResult="+s"${Adb.adbBinaryPath} $command".!!)
+    Console.println("command executeAdbCommandWithResult="+ command)
+    Console.println("adbBinaryPath executeAdbCommandWithResult="+Adb.adbBinaryPath)
     s"${Adb.adbBinaryPath} $command".!!
   }
 
