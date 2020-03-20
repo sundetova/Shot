@@ -1,5 +1,5 @@
-group 'com.karumi'
-version '3.1.1-SNAPSHOT'
+group='com.github.sundetova'
+version '3.1.8'
 
 apply plugin: 'scala'
 apply plugin: 'jacoco'
