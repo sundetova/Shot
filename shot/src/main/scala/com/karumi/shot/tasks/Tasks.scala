@@ -44,7 +44,7 @@ class ExecuteScreenshotTests extends ShotTask {
   def executeScreenshotTests(): Unit = {
     val project = getProject
     val recordScreenshots = project.hasProperty("record")
-    val device = project.hasProperty("device")
+    val device = project.getProperties.get("device").toString
     println("executeScreenshotTests device=" + device)
     val printBase64 = project.hasProperty("printBase64")
     val projectFolder = shotExtension.getReferenceDir
@@ -79,7 +79,7 @@ class DownloadScreenshotsTask extends ShotTask {
   @TaskAction
   def downloadScreenshots(): Unit = {
     val projectFolder = shotExtension.getReferenceDir.toString
-    val device = getProject.hasProperty("device")
+    val device = getProject.getProperties.get("device").toString
     println("downloadScreenshots device=" + device)
     val appId = shotExtension.getOptionAppId
     shot.downloadScreenshots(projectFolder, appId, device)
@@ -98,7 +98,7 @@ class RemoveScreenshotsTask extends ShotTask {
   @TaskAction
   def clearScreenshots(): Unit = {
     val appId = shotExtension.getOptionAppId
-    val device = getProject.hasProperty("device")
+    val device = getProject.getProperties.get("device").toString
     println("clearScreenshots device=" + device)
     shot.removeScreenshots(appId, device)
   }
