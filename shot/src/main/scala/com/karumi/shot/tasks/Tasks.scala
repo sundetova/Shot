@@ -8,7 +8,6 @@ import com.karumi.shot.ui.Console
 import com.karumi.shot.{Files, Shot, ShotExtension}
 import org.gradle.api.{DefaultTask, GradleException}
 import org.gradle.api.tasks.TaskAction
-import org.gradle.util.Path
 
 abstract class ShotTask() extends DefaultTask {
 
