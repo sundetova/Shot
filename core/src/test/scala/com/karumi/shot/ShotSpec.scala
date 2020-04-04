@@ -73,7 +73,7 @@ class ShotSpec
       .expects(device, expectedScreenshotsFolder, appId.get)
     (files.rename _).expects(expectedOriginalMetadataFile, expectedRenamedFile)
 
-    shot.downloadScreenshots(projectFolder, appId)
+    shot.downloadScreenshots(projectFolder, appId, device)
   }
 
   it should "configure adb path" in {
@@ -98,6 +98,6 @@ class ShotSpec
 
     (console.showError _).expects(appIdConfigError)
 
-    shot.downloadScreenshots(projectFolder, appId)
+    shot.downloadScreenshots(projectFolder, appId, "")
   }
 }

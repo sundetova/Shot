@@ -9,13 +9,6 @@ object Adb {
 }
 
 class Adb {
-  def devices: List[String] = {
-    executeAdbCommandWithResult("devices").split('\n').toList.drop(1).map {
-      line =>
-        line.split('\t').toList.head
-    }
-  }
-
   def pullScreenshots(device: String,
                       screenshotsFolder: Folder,
                       appId: AppId): Unit =

@@ -44,19 +44,21 @@ class ExecuteScreenshotTests extends ShotTask {
   def executeScreenshotTests(): Unit = {
     val project = getProject
     val recordScreenshots = project.hasProperty("record")
+    val device = project.hasProperty("device")
+    println("executeScreenshotTests device=" + device)
     val printBase64 = project.hasProperty("printBase64")
     val projectFolder = shotExtension.getReferenceDir
     val projectName = project.getName
     val buildFolder = project.getBuildDir.getAbsolutePath
     val appId = shotExtension.getAppId
     if (recordScreenshots) {
-      shot.recordScreenshots(appId, buildFolder, projectFolder, projectName)
+      shot.recordScreenshots(appId, buildFolder, projectFolder, projectName, device)
     } else {
       val result = shot.verifyScreenshots(appId,
-                                          buildFolder,
-                                          projectFolder,
-                                          project.getName,
-                                          printBase64)
+        buildFolder,
+        projectFolder,
+        project.getName,
+        printBase64)
       if (result.hasErrors) {
         throw new GradleException(
           "Screenshots comparision fail. Review the execution report to see what's broken your build.")
@@ -77,8 +79,10 @@ class DownloadScreenshotsTask extends ShotTask {
   @TaskAction
   def downloadScreenshots(): Unit = {
     val projectFolder = shotExtension.getReferenceDir.toString
+    val device = getProject.hasProperty("device")
+    println("downloadScreenshots device=" + device)
     val appId = shotExtension.getOptionAppId
-    shot.downloadScreenshots(projectFolder, appId)
+    shot.downloadScreenshots(projectFolder, appId, device)
   }
 }
 
@@ -94,6 +98,8 @@ class RemoveScreenshotsTask extends ShotTask {
   @TaskAction
   def clearScreenshots(): Unit = {
     val appId = shotExtension.getOptionAppId
-    shot.removeScreenshots(appId)
+    val device = getProject.hasProperty("device")
+    println("clearScreenshots device=" + device)
+    shot.removeScreenshots(appId, device)
   }
 }
