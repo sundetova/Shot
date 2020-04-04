@@ -99,7 +99,7 @@ class Shot(adb: Adb,
 
   def removeScreenshots(appId: Option[AppId], device: String): Unit =
     executeIfAppIdIsValid(appId) { applicationId =>
-      clearScreenshots(applicationId)
+      clearScreenshots(applicationId, device)
     }
 
   private def executeIfAppIdIsValid(appId: Option[AppId])(f: AppId => Unit) =
